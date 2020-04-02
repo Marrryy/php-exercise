@@ -32,7 +32,8 @@ if(isset($_POST['who']) && isset($_POST['pass'])){
         // echo "you are right";
         $_SESSION['name'] = $_POST['who'];
         // header("Location: autos.php?name=".urlencode($_POST['who']));
-        header("Location: view.php");
+        // header("Location: view.php");
+        header("Location: index.php");
         echo $_SESSION['name'];
         error_log("Login success ".$_POST['who']);
       }else{
@@ -68,9 +69,10 @@ if ( isset($_SESSION['error']) ) {
 <label for="nam">User Name</label>
 <input type="text" name="who" id="nam"><br/>
 <label for="id_1723">Password</label>
-<input type="text" name="pass" id="id_1723"><br/>
+<input type="password" name="pass" id="id_1723"><br/>
 <input type="submit" value="Log In">
-<input type="submit" name="cancel" value="Cancel">
+<!-- <input type="submit" name="cancel" value="Cancel"> -->
+<a href ="index.php">Cancel</a>
 </form>
 </body>
 </html>

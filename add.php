@@ -6,10 +6,11 @@ if(!isset($_SESSION['name'])){
 }
 
 
-if(isset($_POST['make']) && isset($_POST['year']) && isset($_POST['mileage']) ){
+if(isset($_POST['make']) && isset($_POST['year']) 
+&& isset($_POST['mileage']) && isset($_POST['model'])){
 
   if ( strlen($_POST['make']) < 1 || ($_POST['year']) < 1 || ($_POST['mileage']) < 1) {
-    $_SESSION['error'] = 'Make is required';
+    $_SESSION['error'] = 'All fields are required';
     header("Location: add.php");
     return;
 }
@@ -25,22 +26,20 @@ if(isset($_POST['make']) && isset($_POST['year']) && isset($_POST['mileage']) ){
   }else{
     // if(isset($_POST)){
       $stmt = $pdo->prepare('INSERT INTO autos
-      (make, year, mileage) VALUES ( :mk, :yr, :mi)');
+      (make,model, year, mileage) VALUES ( :mk, :md, :yr, :mi)');
       $stmt->execute(array(
       ':mk' => $_POST['make'],
+      ':md' => $_POST['model'],
       ':yr' => $_POST['year'],
       ':mi' => $_POST['mileage'])
       );
       $_SESSION['success'] = "Record inserted";
-      header("Location:view.php");
+      header("Location:index.php");
       return;
     // }
 
   } 
 }
-
-
-
 ?>
 
 
@@ -71,6 +70,8 @@ if ( isset($_SESSION['error']) ) {
 <form method="post">
 <p>Make:
 <input type="text" name="make" size="60"/></p>
+<p>Model:
+<input type="text" name="model" size="60"/></p>
 <p>Year:
 <input type="text" name="year"/></p>
 <p>Mileage:
